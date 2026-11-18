@@ -1,0 +1,310 @@
+/* Admin Dashboard Styles */
+.admin-sidebar {
+    background: linear-gradient(135deg, var(--purple-primary), var(--purple-deep));
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.admin-profile {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 1.5rem;
+}
+
+.admin-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--red-light);
+    object-fit: cover;
+}
+
+.admin-profile h5 {
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+.admin-profile small {
+    color: var(--red-light);
+}
+
+.sidebar-menu .nav-link {
+    color: var(--red-light);
+    padding: 12px 20px;
+    margin: 5px 0;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu .nav-link:hover,
+.sidebar-menu .nav-link.active {
+    background: rgba(255,255,255,0.2);
+    color: var(--purple-deep);
+}
+
+.sidebar-menu .nav-link i {
+    margin-right: 10px;
+    width: 25px;
+}
+
+.admin-content {
+    padding: 2rem;
+    background: var(--bg-light);
+    min-height: 100vh;
+}
+
+.admin-page {
+    display: none;
+}
+
+.admin-page.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+/* Admin Table */
+.admin-table {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.admin-table thead {
+    background: linear-gradient(135deg, var(--purple-primary), var(--purple-deep));
+    color: white;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-confirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.btn-action {
+    padding: 5px 10px;
+    margin: 0 3px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+}
+
+.btn-confirm {
+    background: #28a745;
+    color: white;
+    border: none;
+}
+
+.btn-cancel {
+    background: #dc3545;
+    color: white;
+    border: none;
+}
+
+.btn-delete {
+    background: #6c757d;
+    color: white;
+    border: none;
+}
+
+/* Stats Cards */
+.stats-cards {
+    margin-bottom: 2rem;
+}
+
+.stat-card-mini {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat-card-mini:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card-mini i {
+    font-size: 2rem;
+    color: var(--purple-primary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card-mini h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+    color: var(--red-primary);
+}
+
+.stat-card-mini p {
+    margin: 0;
+    color: var(--gray);
+}
+
+/* Announcement Cards */
+.announcement-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.announcement-card:hover {
+    transform: translateY(-5px);
+}
+
+.announcement-image {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.announcement-content {
+    padding: 1.5rem;
+}
+
+.announcement-title {
+    color: var(--purple-primary);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.announcement-destination {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--red-light);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.announcement-date {
+    color: var(--gray);
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.announcement-discount {
+    background: linear-gradient(135deg, var(--purple-primary), var(--purple-deep));
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Chart Cards */
+.chart-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.chart-card h4 {
+    color: var(--purple-primary);
+    margin-bottom: 1.5rem;
+}
+
+/* Settings Card */
+.settings-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.settings-card h4 {
+    color: var(--purple-primary);
+    margin-bottom: 1.5rem;
+}
+
+/* Activity Feed */
+.activity-item {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+}
+
+.activity-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--purple-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.activity-content {
+    flex: 1;
+}
+
+.activity-title {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.activity-time {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-content {
+        padding: 1rem;
+    }
+    
+    .admin-table {
+        font-size: 0.85rem;
+    }
+    
+    .admin-table th,
+    .admin-table td {
+        padding: 0.5rem;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

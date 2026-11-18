@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Marwa Travels</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .gallery-hero {
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-deep));
+            padding: 100px 100px;
+            margin-top: 100px;
+            height: 50vh;
+            color: white;
+            text-align: center;
+        }
+        
+        .gallery-grid {
+            padding: 3rem 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 9999;
+            cursor: pointer;
+        }
+        
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+        
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+        
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            background: var(--red-primary);
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .back-button {
+            margin: 2rem 0;
+        }
+        
+        .highlights-section {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+        
+        .highlights-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .highlights-list li {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            color: var(--purple-primary);
+            font-weight: 500;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-hero {
+                padding: 80px 0 40px;
+            }
+            
+            .lightbox-prev,
+            .lightbox-next {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="images/Marwa logo.png" alt="Marwa Travels Logo" class="navbar-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#destinations">Destinations</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#booking">Book Now</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="gallery-hero" id="galleryHero">
+    <div class="container">
+        <h1 id="destinationName">Destination Gallery</h1>
+        <p id="destinationDescription" class="lead">Explore beautiful moments from your next adventure</p>
+    </div>
+</div>
+
+<div class="container gallery-grid">
+    <div class="back-button">
+        <a href="index.html#destinations" class="btn btn-primary-custom">
+            <i class="fas fa-arrow-left"></i> Back to Destinations
+        </a>
+    </div>
+    
+    <div class="row" id="galleryGrid"></div>
+    
+    <div class="highlights-section" id="highlightsSection">
+        <h3 class="text-purple"><i class="fas fa-star"></i> Experience Highlights</h3>
+        <ul class="highlights-list" id="highlightsList"></ul>
+    </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <span class="lightbox-prev"><i class="fas fa-chevron-left"></i></span>
+    <span class="lightbox-next"><i class="fas fa-chevron-right"></i></span>
+    <img id="lightboxImage" src="">
+</div>
+
+<footer class="modern-footer mt-5">
+    <div class="container text-center">
+        <p>&copy; 2025 Marwa Travels. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+<script>
+    let currentGallery = [];
+    let currentIndex = 0;
+    
+    // Get destination from URL or sessionStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    const destId = parseInt(urlParams.get('id'));
+    
+    let destination = null;
+    
+    if (destId) {
+        destination = destinations.find(d => d.id === destId);
+    } else {
+        const stored = sessionStorage.getItem('galleryDestination');
+        if (stored) {
+            destination = JSON.parse(stored);
+        }
+    }
+    
+    if (destination) {
+        document.getElementById('destinationName').textContent = destination.name;
+        document.getElementById('destinationDescription').textContent = destination.description;
+        
+        // Display gallery
+        currentGallery = destination.gallery;
+        const galleryGrid = document.getElementById('galleryGrid');
+        galleryGrid.innerHTML = destination.gallery.map((img, index) => `
+            <div class="col-md-6 col-lg-4">
+                <div class="gallery-item" onclick="openLightbox(${index})">
+                    <img src="${img}" alt="${destination.name} - Image ${index + 1}">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i> Click to enlarge
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        
+        // Display highlights
+        const highlightsList = document.getElementById('highlightsList');
+        highlightsList.innerHTML = destination.highlights.map(h => `<li><i class="fas fa-check-circle text-red"></i> ${h}</li>`).join('');
+    } else {
+        document.getElementById('galleryHero').innerHTML = `
+            <div class="container text-center">
+                <h1>Gallery Not Found</h1>
+                <p>Please go back to the <a href="index.html#destinations" style="color: var(--red-light);">destinations page</a></p>
+            </div>
+        `;
+    }
+    
+    // Lightbox functions
+    function openLightbox(index) {
+        currentIndex = index;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        lightboxImage.src = currentGallery[currentIndex];
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+        document.getElementById('lightboxImage').src = currentGallery[currentIndex];
+    }
+    
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % currentGallery.length;
+        document.getElementById('lightboxImage').src = currentGallery[currentIndex];
+    }
+    
+    // Event listeners
+    document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    document.querySelector('.lightbox-prev').addEventListener('click', prevImage);
+    document.querySelector('.lightbox-next').addEventListener('click', nextImage);
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+        if (e.target === document.getElementById('lightbox')) closeLightbox();
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (!document.getElementById('lightbox').classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'ArrowRight') nextImage();
+    });
+</script>
+</body>
+</html>
